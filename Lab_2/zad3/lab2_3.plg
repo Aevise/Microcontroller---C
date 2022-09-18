@@ -1,0 +1,14 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+C:\Documents and Settings\Administrator\Pulpit\Lab_2\zad3\lab2_3.uvproj
+Project File Date:  05/15/2022
+
+<h2>Output:</h2>
+Build target 'Target 1'
+linking...
+Program Size: data=20.4 xdata=0 const=4 code=472
+creating hex file from "lab2_3"...
+"lab2_3" - 0 Error(s), 0 Warning(s).
