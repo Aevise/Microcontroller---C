@@ -1,0 +1,79 @@
+C51 COMPILER V9.51   PROG2                                                                 04/25/2022 15:06:15 PAGE 1   
+
+
+C51 COMPILER V9.51, COMPILATION OF MODULE PROG2
+OBJECT MODULE PLACED IN prog2.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE prog2.c OMF2 BROWSE DEBUG TABS(2)
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          
+   3          unsigned char code Diody[] = {0x7F, 0xBF, 0xDF, 0xEF, 0xF7, 0xFB, 0xFD, 0xFE};
+   4          unsigned char q = 0;
+   5          unsigned char wariant = 1;
+   6          unsigned int licznik = 0;
+   7          
+   8          void setup(void)
+   9          {
+  10   1        TH1   = TL1 = 0x00;     // ustawienie wartosci poczatkowych timera
+  11   1        TMOD  = TMOD & 0x0F;
+  12   1        TMOD  = TMOD | 0x20;
+  13   1        ET1   = 1;            //wlaczenie pierwszego timera
+  14   1        EA    = 1;
+  15   1        TR1   = 1;
+  16   1      }
+  17          
+  18          void ISR_Timer1(void) interrupt 3
+  19          {
+  20   1        licznik++;
+  21   1        if(licznik == (wariant*450))
+  22   1        {
+  23   2          if(q < 6)
+  24   2          {
+  25   3            q++;
+  26   3          }
+  27   2          else
+  28   2          {
+  29   3            q = 0;
+  30   3          }   
+  31   2        licznik = 0;
+  32   2          if(wariant == 1)
+  33   2          {
+  34   3            wariant = 2;
+  35   3          }
+  36   2          else
+  37   2          {
+  38   3            wariant = 1;
+  39   3          }
+  40   2        }
+  41   1      }
+  42          
+  43          void main(void)
+  44          {
+  45   1        setup();
+  46   1        while(1)
+  47   1        {
+  48   2          P2 = Diody[q] & Diody[q+1];
+  49   2        }
+  50   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    138    ----
+   CONSTANT SIZE    =      8    ----
+C51 COMPILER V9.51   PROG2                                                                 04/25/2022 15:06:15 PAGE 2   
+
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      4    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+   EDATA SIZE       =   ----    ----
+   HDATA SIZE       =   ----    ----
+   XDATA CONST SIZE =   ----    ----
+   FAR CONST SIZE   =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
